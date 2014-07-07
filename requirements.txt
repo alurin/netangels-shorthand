@@ -1,1 +1,2 @@
 django>=1.6,<1.7
+django-model-utils>=2.0,<2.1

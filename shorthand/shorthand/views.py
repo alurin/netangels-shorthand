@@ -1,14 +1,45 @@
 from django.views import generic
+from django.views.generic import detail
 from . import forms
+from . import models
 
 
 class HomepageView(generic.TemplateView):
+    """
+    Данный вид отображает главную страницу сайта
+
+    :notice: Данный класс унаследован от TemplateView для расширения возможностей данного вида в дальнейшем.
+    """
     template_name = 'homepage.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(HomepageView, self).get_context_data(**kwargs)
+        context.update({
+            'form': forms.ShorthandUrlCreateForm()
+        })
+        return context
 
 
 class CreateShorthandView(generic.CreateView):
+    """
+    Обработчик создания краткой ссылки
+    """
     form_class = forms.ShorthandUrlCreateForm
     template_name = 'shorthands/create.html'
 
-    # def form_valid(self, form):
-    #     form.
+
+class ShorthandRedirectView(generic.RedirectView, detail.SingleObjectMixin):
+    """
+    Данный вид редиректит агента пользователя c краткой ссылки на полную. В качестве побочного эфекта увлечивается
+    её количество просмотров.
+
+    :notice: Заместо `slug` использован `shortcut`.
+    """
+    model = models.ShorthandUrl
+    slug_field = 'shortcut'
+    slug_url_kwarg = 'shortcut'
+
+    def get_redirect_url(self, *args, **kwargs):
+        short = self.get_object()
+        short.increment()
+        return short.url
