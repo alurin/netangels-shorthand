@@ -9,8 +9,10 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from django.conf.global_settings import TEMPLATE_DIRS, STATICFILES_DIRS
 import os
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+PROJECT_DIR = os.path.dirname(__file__)
+BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 
 # Quick-start development settings - unsuitable for production
@@ -38,6 +40,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # batteries apps
+    'widget_tweaks',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -47,6 +52,14 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+)
+
+TEMPLATE_DIRS = (
+    os.path.join(PROJECT_DIR, 'templates'),
+)
+
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_DIR, 'static'),
 )
 
 ROOT_URLCONF = 'shorthand.urls'
@@ -67,7 +80,7 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-ru'
 
 TIME_ZONE = 'UTC'
 

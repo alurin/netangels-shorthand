@@ -1,0 +1,26 @@
+{% load l10n %}
+
+{% if object_list %}
+    <table class="table table-striped">
+        <tbody class="table-hover">
+            {% for short in object_list %}
+                <tr>
+                    <td>
+                        <a href="{{ short.get_redirect_url }}"><span class="glyphicon glyphicon-share"></span>{{ short.shortcut }}</a>
+                    </td>
+                    <td><span>{{ short.views_counter }}</span></td>
+                    <td><span>{{ short.created_at|date:'d N Y H:i:s' }}</span></td>
+
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <a type="button" class="btn btn-default" href="{% url 'shorthand:detail' pk=short.id %}"><span class="glyphicon glyphicon-zoom-in"></span></a>
+                            <a type="button" class="btn btn-default" href="{% url 'shorthand:delete' pk=short.id %}"><span class="glyphicon glyphicon-remove"></span></a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+
+{% endif %}

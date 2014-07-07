@@ -15,12 +15,13 @@ class HomepageView(generic.TemplateView):
     def get_context_data(self, **kwargs):
         context = super(HomepageView, self).get_context_data(**kwargs)
         context.update({
-            'form': forms.ShorthandUrlCreateForm()
+            'form': forms.ShorthandUrlCreateForm(),
+            'popular_shorthands': models.ShorthandUrl.objects.first_populars(),
         })
         return context
 
 
-class CreateShorthandView(generic.CreateView):
+class ShorthandUrlCreateView(generic.CreateView):
     """
     Обработчик создания краткой ссылки
     """
@@ -28,16 +29,24 @@ class CreateShorthandView(generic.CreateView):
     template_name = 'shorthands/create.html'
 
 
-class ShorthandRedirectView(generic.RedirectView, detail.SingleObjectMixin):
+class ShorthandUrlDetailView(generic.DetailView):
+    model = models.ShorthandUrl
+    template_name = 'shorthands/detail.html'
+
+
+class ShorthandUrlRedirectView(generic.RedirectView, detail.SingleObjectMixin):
     """
     Данный вид редиректит агента пользователя c краткой ссылки на полную. В качестве побочного эфекта увлечивается
     её количество просмотров.
 
     :notice: Заместо `slug` использован `shortcut`.
+    :notice: В задании не чего не было сказано про способ редиректа, поэтому для лучшей отладки `permanent` выставлен
+             в False
     """
     model = models.ShorthandUrl
     slug_field = 'shortcut'
     slug_url_kwarg = 'shortcut'
+    permanent = False
 
     def get_redirect_url(self, *args, **kwargs):
         short = self.get_object()
