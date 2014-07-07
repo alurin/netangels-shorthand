@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse_lazy
 from django.views import generic
 from django.views.generic import detail
 from . import forms
@@ -47,6 +48,16 @@ class ShorthandUrlListView(generic.ListView):
 
     def get_queryset(self):
         return super(ShorthandUrlListView, self).get_queryset().order_by_popularity()
+
+
+class ShorthandUrlDeleteView(generic.DeleteView):
+    """
+    Вид для вывода сообщения об подтверждении удалении, и окончательном удалении после согласия с этим подтверждением.
+    """
+    model = models.ShorthandUrl
+    template_name = 'shorthands/delete.html'
+    success_url = reverse_lazy('shorthand:list')
+
 
 
 class ShorthandUrlRedirectView(generic.RedirectView, detail.SingleObjectMixin):

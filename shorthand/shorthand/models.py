@@ -44,7 +44,7 @@ class ShorthandUrl(models.Model):
         verbose_name_plural = 'Краткие URL\'ы'
 
     created_at = fields.AutoCreatedField('Дата создания')
-    url = models.URLField('URL', help_text='Полный URL')
+    url = models.URLField('URL', help_text='Полный URL', null=False, blank=False)
     shortcut = models.CharField('URI', max_length=200, help_text='Краткий URI', db_index=True, default='', blank=True, editable=False)
     views_counter = models.PositiveIntegerField('Количество просмотров', default=0)
 

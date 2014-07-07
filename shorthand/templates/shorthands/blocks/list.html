@@ -11,12 +11,14 @@
                     <td><span>{{ short.views_counter }}</span></td>
                     <td><span>{{ short.created_at|date:'d N Y H:i:s' }}</span></td>
 
-                    <td class="text-right">
-                        <div class="btn-group">
-                            <a type="button" class="btn btn-default" href="{% url 'shorthand:detail' pk=short.id %}"><span class="glyphicon glyphicon-zoom-in"></span></a>
-                            <a type="button" class="btn btn-default" href="{% url 'shorthand:delete' pk=short.id %}"><span class="glyphicon glyphicon-remove"></span></a>
-                        </div>
-                    </td>
+                    {% if with_buttons %}
+                        <td class="text-right">
+                            <div class="btn-group">
+                                <a type="button" class="btn btn-default" href="{% url 'shorthand:detail' pk=short.id %}"><span class="glyphicon glyphicon-zoom-in"></span></a>
+                                <a type="button" class="btn btn-default" href="{% url 'shorthand:delete' pk=short.id %}"><span class="glyphicon glyphicon-remove"></span></a>
+                            </div>
+                        </td>
+                    {% endif %}
                 </tr>
             {% endfor %}
         </tbody>

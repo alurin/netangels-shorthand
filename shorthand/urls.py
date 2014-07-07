@@ -12,7 +12,7 @@ shorthand_urls = patterns(
     url(r'^$', views.ShorthandUrlListView.as_view(), name='list'),
 
     url(r'^(?P<pk>\d+)/$', views.ShorthandUrlDetailView.as_view(), name='detail'),
-    url(r'^(?P<pk>\d+)/delete$', views.ShorthandUrlCreateView.as_view(), name='delete'),
+    url(r'^(?P<pk>\d+)/delete$', views.ShorthandUrlDeleteView.as_view(), name='delete'),
 
     url(r'^create/$', views.ShorthandUrlCreateView.as_view(), name='create'),
 )
