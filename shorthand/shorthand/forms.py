@@ -4,7 +4,7 @@ from . import models
 
 class ShorthandUrlCreateForm(forms.ModelForm):
     """
-    Форма для создания нового сокрощенного URL'а
+    Форма для создания нового краткой ссылки
     """
     class Meta:
         model = models.ShorthandUrl

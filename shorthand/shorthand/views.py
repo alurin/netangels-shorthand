@@ -30,11 +30,17 @@ class ShorthandUrlCreateView(generic.CreateView):
 
 
 class ShorthandUrlDetailView(generic.DetailView):
+    """
+    Вид для отображения детальной информации о краткой ссылке
+    """
     model = models.ShorthandUrl
     template_name = 'shorthands/detail.html'
 
 
 class ShorthandUrlListView(generic.ListView):
+    """
+    Вид для отображения списка кратких ссылок
+    """
     model = models.ShorthandUrl
     template_name = 'shorthands/list.html'
     paginate_by = 10
