@@ -8,7 +8,7 @@
     {% include "shorthands/blocks/form.html" %}
 
     <div>
-        <h2>ТОП-20 самых популярных ссылок</h2>
+        <h2>ТОП-20 самых популярных ссылок <small><a href="{% url 'shorthand:list' %}" class="label label-info">Все</a></small></h2>
         {% include "shorthands/blocks/list.html" with object_list=popular_shorthands %}
     </div>
 
