@@ -9,10 +9,12 @@ from shorthand.shorthand import views
 shorthand_urls = patterns(
     '',
 
-    url(r'^(?P<pk>\d+)/', views.ShorthandUrlDetailView.as_view(), name='detail'),
-    url(r'^(?P<pk>\d+)/delete', views.ShorthandUrlCreateView.as_view(), name='delete'),
+    url(r'^$', views.ShorthandUrlListView.as_view(), name='list'),
 
-    url(r'^create/', views.ShorthandUrlCreateView.as_view(), name='create'),
+    url(r'^(?P<pk>\d+)/$', views.ShorthandUrlDetailView.as_view(), name='detail'),
+    url(r'^(?P<pk>\d+)/delete$', views.ShorthandUrlCreateView.as_view(), name='delete'),
+
+    url(r'^create/$', views.ShorthandUrlCreateView.as_view(), name='create'),
 )
 
 # Глобальный список URL'ов проекта

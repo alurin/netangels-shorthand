@@ -16,6 +16,14 @@ class ShorthandUrlQuerySet(query.QuerySet):
     """
     QuerySet для кратких ссылок
     """
+    def order_by_popularity(self):
+        """
+        Сортировка по популярности
+
+        :return: ShorthandUrlQuerySet
+        """
+        return self.order_by('-views_counter', 'created_at')
+
     def first_populars(self, count=20):
         """
         Получение queryset'а с первыми по популярности краткими ссылками.
@@ -23,7 +31,7 @@ class ShorthandUrlQuerySet(query.QuerySet):
         :param count: Количество элементов в результате, по умолчанию 20
         :return: ShorthandQuerySet Новый queryset
         """
-        queryset = self.order_by('-views_counter', 'created_at')
+        queryset = self.order_by_popularity()
         return queryset[:count]
 
 

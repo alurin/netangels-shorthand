@@ -34,6 +34,15 @@ class ShorthandUrlDetailView(generic.DetailView):
     template_name = 'shorthands/detail.html'
 
 
+class ShorthandUrlListView(generic.ListView):
+    model = models.ShorthandUrl
+    template_name = 'shorthands/list.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return super(ShorthandUrlListView, self).get_queryset().order_by_popularity()
+
+
 class ShorthandUrlRedirectView(generic.RedirectView, detail.SingleObjectMixin):
     """
     Данный вид редиректит агента пользователя c краткой ссылки на полную. В качестве побочного эфекта увлечивается
